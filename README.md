@@ -1,2 +1,2 @@
 ## IJA project
-Simple chess desktop application
+Simple desktop chess application
