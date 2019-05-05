@@ -66,6 +66,30 @@ public class MoveList implements Iterable<Move> {
         return false;
     }
 
+    public final Move pop() {
+        if (isEmpty()) {
+            return null;
+        }
+        Move last = moves.get(moves.size() - 1);
+        moves.remove(moves.size() - 1);
+        return last;
+    }
+
+    public final Move peek() {
+        if (isEmpty()) {
+            return null;
+        }
+        return moves.get(moves.size() - 1);
+    }
+
+    public final int size() {
+        return moves.size();
+    }
+
+    public final boolean isEmpty() {
+        return moves.isEmpty();
+    }
+
     public final boolean causesCheck(Move move) {
         if (!check) {
             return false;
@@ -81,11 +105,6 @@ public class MoveList implements Iterable<Move> {
 
     @Override
     public Iterator<Move> iterator() {
-        return null;
-    }
-
-    @Override
-    public void forEach(Consumer<? super Move> action) {
-
+        return moves.iterator();
     }
 }
