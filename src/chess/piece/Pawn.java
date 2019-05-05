@@ -25,11 +25,11 @@ public class Pawn extends Piece {
 
         Move leftCapture = new Move(pos, new Position(pos, -1, dir));
         addPromotion(leftCapture);
-        list.addMove(leftCapture);
+        list.addOnlyCapture(leftCapture);
 
         Move rightCapture = new Move(pos, new Position(pos, 1, dir));
         addPromotion(rightCapture);
-        list.addMove(rightCapture);
+        list.addOnlyCapture(rightCapture);
 
         // TODO: en passant check
         return list;
