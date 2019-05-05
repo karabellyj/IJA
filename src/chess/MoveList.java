@@ -20,6 +20,42 @@ public class MoveList implements Iterable<Move> {
         check = checkForCheck;
     }
 
+    public final boolean add(Move move) {
+        moves.add(move);
+        return true;
+    }
+
+    public final boolean addAll(Iterable<Move> list) {
+        for (Move move : list) {
+            moves.add(move);
+        }
+        return true;
+    }
+
+    public final boolean addMove(Move move) {
+        if (board.isFree(move.getDestination())) {
+            if (!causesCheck(move)) {
+                moves.add(move);
+                return true;
+            }
+            return true; // false for blocking moves
+        }
+        return false;
+    }
+
+    public final boolean causesCheck(Move move) {
+        if (!check) {
+            return false;
+        }
+        Piece p = board.getPiece(move.getOrigin());
+        board.move(move);
+
+        boolean ret = board.check(p.getSide());
+        board.undo();
+
+        return ret;
+    }
+
     @Override
     public Iterator<Move> iterator() {
         return null;
