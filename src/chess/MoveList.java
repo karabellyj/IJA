@@ -43,6 +43,29 @@ public class MoveList implements Iterable<Move> {
         return false;
     }
 
+    public final boolean addCapture(Move move) {
+        Piece p = board.getPiece(move.getOrigin());
+
+        if (board.isFree(move.getDestination(), p.getSide())) {
+            if (!causesCheck(move)) {
+                add(move);
+                return true;
+            }
+            return true;
+        }
+        return false;
+    }
+
+    public final boolean addOnlyCapture(Move move) {
+        Piece p = board.getPiece(move.getOrigin());
+
+        if (board.isFree(move.getDestination(), p.getSide()) && !board.isFree(move.getDestination()) && !causesCheck(move)) {
+            add(move);
+            return true;
+        }
+        return false;
+    }
+
     public final boolean causesCheck(Move move) {
         if (!check) {
             return false;
