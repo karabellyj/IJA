@@ -107,4 +107,13 @@ public class MoveList implements Iterable<Move> {
     public Iterator<Move> iterator() {
         return moves.iterator();
     }
+
+    public final boolean containsDest(Position pos) {
+        for (Move move : this) {
+            if (pos.equals(move.getDestination())) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
