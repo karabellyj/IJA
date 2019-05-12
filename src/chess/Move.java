@@ -65,4 +65,14 @@ public final class Move {
     public Piece.Side getReplacementSide() {
         return replacementSide;
     }
+
+    @Override
+    public String toString() {
+        int origin_row = 1 + origin.getY();
+        char origin_col = (char) ('a' + origin.getX());
+
+        int dest_row = 1 + destination.getY();
+        char dest_col = (char) ('a' + destination.getX());
+        return "[" + origin_col + origin_row + "]" + " -> " + "[" + dest_col + dest_row + "]";
+    }
 }
