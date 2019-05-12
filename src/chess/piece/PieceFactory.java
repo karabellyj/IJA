@@ -7,6 +7,17 @@ public class PieceFactory {
     }
 
     public static Piece create(String name, Piece.Side side) {
-        return null;
+        switch (name) {
+            case "Queen":
+                return new Queen(side);
+            case "Bishop":
+                return new Bishop(side);
+            case "Rook":
+                return new Rook(side);
+            case "Knight":
+                return new Knight(side);
+            default:
+                return null;
+        }
     }
 }
