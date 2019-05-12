@@ -1,5 +1,9 @@
 package chess;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ListChangeListener;
+import javafx.collections.ObservableList;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -8,7 +12,7 @@ import java.util.function.Consumer;
 public class MoveList implements Iterable<Move> {
     private Board board;
     private boolean check;
-    private final List<Move> moves = new ArrayList<Move>();
+    protected final ObservableList<Move> moves = FXCollections.observableArrayList();
 
 
     public MoveList(Board b) {
@@ -101,6 +105,15 @@ public class MoveList implements Iterable<Move> {
         board.undo();
 
         return ret;
+    }
+
+    public final Move getMoveByDest(Position dest) {
+        for (Move move : this) {
+            if (dest.equals(move.getDestination())) {
+                return move;
+            }
+        }
+        return null;
     }
 
     @Override
