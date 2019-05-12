@@ -34,4 +34,9 @@ public class Knight extends Piece {
 
         return list;
     }
+
+    @Override
+    public String getShortName() {
+        return "J";
+    }
 }

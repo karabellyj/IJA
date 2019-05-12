@@ -81,4 +81,9 @@ public class Bishop extends Piece {
         }
         return list;
     }
+
+    @Override
+    public String getShortName() {
+        return "S";
+    }
 }

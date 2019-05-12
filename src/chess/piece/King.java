@@ -36,4 +36,9 @@ public class King extends Piece {
         inCheck = getBoard().check(getSide());
         return inCheck;
     }
+
+    @Override
+    public String getShortName() {
+        return "K";
+    }
 }

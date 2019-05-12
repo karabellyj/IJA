@@ -16,4 +16,9 @@ public class Queen extends Piece {
         list = Bishop.getMoves(this, list);
         return list;
     }
+
+    @Override
+    public String getShortName() {
+        return "D";
+    }
 }

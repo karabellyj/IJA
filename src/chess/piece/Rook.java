@@ -72,4 +72,9 @@ public class Rook extends Piece {
         }
         return list;
     }
+
+    @Override
+    public String getShortName() {
+        return "V";
+    }
 }

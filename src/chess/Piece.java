@@ -32,6 +32,7 @@ public abstract class Piece {
     }
 
     public abstract MoveList getMoves(boolean checkForCheck);
+    public abstract String getShortName();
 
     public final void setPosition(Position pos) {
         position = pos;

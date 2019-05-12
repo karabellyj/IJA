@@ -61,4 +61,9 @@ public class Pawn extends Piece {
         promotion.setReplacementSide(getSide());
         move.getNext().setNext(promotion); // add queen
     }
+
+    @Override
+    public String getShortName() {
+        return "p";
+    }
 }
