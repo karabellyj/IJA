@@ -1,10 +1,9 @@
 package chess;
 
+import chess.board.BoardFactory;
 import chess.piece.King;
 import chess.piece.PieceFactory;
-import javafx.scene.layout.GridPane;
-
-import java.security.SignatureException;
+import javafx.collections.ObservableList;
 
 public abstract class Board {
     private Piece[][] board;
@@ -16,6 +15,8 @@ public abstract class Board {
     public abstract Boolean stalemate(Piece.Side side);
 
     public abstract Boolean check(Piece.Side side);
+
+    public abstract void initPieces();
 
     public final void clear() {
         board = new Piece[width][height];
@@ -48,6 +49,10 @@ public abstract class Board {
 
     public final void move(Move move) {
         moves.add(move);
+        doMove(move);
+    }
+
+    public final void simulateMove(Move move) {
         doMove(move);
     }
 
@@ -115,7 +120,7 @@ public abstract class Board {
     }
 
     public final Boolean isInRange(Position pos) {
-        return (pos.getX() >= 0) && (pos.getY() >= 0) && (pos.getX() < width) && (pos.getX() < height);
+        return (pos.getX() >= 0) && (pos.getY() >= 0) && (pos.getX() < width) && (pos.getY() < height);
     }
 
     public final Boolean isFree(Position pos) {
@@ -128,6 +133,27 @@ public abstract class Board {
 
     public final int moveCount() {
         return moves.size();
+    }
+
+    public final Board copy() {
+        Board fresh = BoardFactory.create(this.getClass());
+        for (Move move : moves) {
+            fresh.move(new Move(move));
+        }
+        return fresh;
+    }
+
+    public final MoveList allMoves(final Piece.Side side, final boolean check) {
+        MoveList list = new MoveList(this, false);
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                Piece p = board[x][y];
+                if (p != null && p.getSide() == side) {
+                    list.addAll(p.getMoves(check));
+                }
+            }
+        }
+        return list;
     }
 
     public final void setPiece(int x, int y, Piece p) {
@@ -160,5 +186,9 @@ public abstract class Board {
 
     public void setHeight(int height) {
         this.height = height;
+    }
+
+    public final ObservableList<Move> getObservableMoves() {
+        return moves.moves;
     }
 }

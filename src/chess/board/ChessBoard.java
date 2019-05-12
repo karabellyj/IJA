@@ -18,6 +18,10 @@ public class ChessBoard extends Board {
         setHeight(HEIGHT);
         clear();
 
+        initPieces();
+    }
+
+    public void initPieces() {
         for (int x = 0; x < WIDTH; x++) {
             setPiece(x, WHITE_PAWN_ROW, new Pawn(Piece.Side.WHITE));
             setPiece(x, BALCK_PAWN_ROW, new Pawn(Piece.Side.BLACK));
@@ -53,7 +57,16 @@ public class ChessBoard extends Board {
     }
 
     private int moveCount(Piece.Side side) {
-        return 0;
+        int count = 0;
+        for (int y = 0; y < getHeight(); y++) {
+            for (int x = 0; x < getWidth(); x++) {
+                Piece p = getPiece(new Position(x, y));
+                if ((p != null) && (p.getSide() == side)) {
+                    count += p.getMoves(true).size();
+                }
+            }
+        }
+        return count;
     }
 
     @Override
